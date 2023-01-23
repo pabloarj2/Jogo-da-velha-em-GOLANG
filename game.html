@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jogo da Velha</title>
+    <style>
+        /* Estilo da tabela */
+        table {
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+        td {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        /* Estilo da mensagem de vencedor */
+        .winner {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+   
+
+    <table>
+        {{range $row := .Board}}
+        <tr>
+            {{range $col := $row}}
+            <td>{{$col}}</td>
+            {{end}}
+        </tr>
+        {{end}}
+    </table>
+
+    <div class="winner">{{if .Winner}}{{.Winner}}{{else}}{{.CurrentPlayer}} player turn{{end}}</div>
+    <form action="/play" method="post">
+        <label for="row">Row:</label>
+        <input type="number" id="row" name="row" min="0" max="2" required>
+        <label for="col">Column:</label>
+        <input type="number" id="col" name="col" min="0" max="2" required>
+        <input type="submit" value="Play">
+    </form>
+</body>
+</html>
